@@ -1,0 +1,26 @@
+﻿@page "{carteiraId:int?}"
+@model MinhaCarteiraRazor.Pages.Carteiras.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Editar a Carteira</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Carteira.Id" />
+
+    <div class="form-group">
+        <label asp-for="Carteira.Nome"></label>
+        <input asp-for="Carteira.Nome" class="form-control" />
+        <span class="text-danger" asp-validation-for="Carteira.Nome"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a asp-page="./List" class="btn btn-default">Voltar</a>
+
+</form>
+
+@section Scripts { 
+    @Html.Partial("_ValidationScriptsPartial")
+}

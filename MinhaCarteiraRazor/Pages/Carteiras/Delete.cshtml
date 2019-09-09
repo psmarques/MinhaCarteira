@@ -1,0 +1,13 @@
+﻿@page "{carteiraId}"
+@model MinhaCarteiraRazor.Pages.Carteiras.DeleteModel
+@{
+}
+
+<h2>Deletar</h2>
+<div class="alert alert-danger">
+    Tem certeza que deseja Excluir a Carteira: @Model.Carteira.Nome ?
+</div>
+<form method="post">
+    <button type="submit" class="btn btn-danger">Sim</button>
+    <a asp-page="List" class="btn btn-default">Não</a>
+</form>

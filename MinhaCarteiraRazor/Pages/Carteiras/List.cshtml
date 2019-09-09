@@ -1,0 +1,57 @@
+﻿@page
+@model MinhaCarteiraRazor.Pages.Carteiras.ListModel
+@{
+    ViewData["Title"] = "Carteiras";
+}
+
+<h1>Carteiras</h1>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info">@TempData["Message"]</div>
+}
+
+<form method="get">
+    <div class="form-group">
+        <div class="input-group">
+            <label>
+                Modo de Exibição:
+                <label><input type="radio" asp-for="ModoView" value="1" checked />Lista</label>
+                &nbsp;
+                <label><input type="radio" asp-for="ModoView" value="2" />Cartão</label>
+            </label>
+        </div>
+
+        <div class="input-group">
+            <input type="search" class="form-control" asp-for="FiltroNome" placeholder="Filtro de Pesquisa" />
+            <span class="input-group-btn">
+                <button class="btn btn-default">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>
+
+@if (Model.ModoView == 2)
+{
+    <div class="panel">
+        @foreach (var item in Model.LstCarteira)
+        {
+            @Html.Partial("_Resumo", item);
+        }
+    </div>
+}
+else
+{
+    <vc:carteira-list lista="@Model.LstCarteira"></vc:carteira-list>
+}
+
+<a asp-page="./Edit" class="btn btn-primary">Nova Carteira</a>
+<a asp-page="./ListComplete" class="btn btn-default">Lista Avançada</a>
+
+@section footer {
+    <div class="small">
+        Você pode cadastrar até 5 carteiras.
+    </div>
+}

@@ -1,0 +1,29 @@
+﻿@page
+@model SignInModel
+@{
+    ViewData["Title"] = "SignIn";
+}
+
+<h2>Entrar</h2>
+
+<form method="post">
+    <div class="form-group col-lg-6 center-block">
+
+        <div class="form-group">
+            <i class="glyphicon glyphicon-user"></i>
+        </div>
+
+        <div class="form-group">
+            <input type="email" class="form-control" placeholder="E-mail" asp-for="Email">
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" asp-for="Password">
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Entrar">
+
+    </div>
+</form>

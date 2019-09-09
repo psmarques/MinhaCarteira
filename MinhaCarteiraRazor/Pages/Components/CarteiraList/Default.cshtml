@@ -1,0 +1,33 @@
+﻿@using MinhaCarteiraRazor.Core.Entities
+
+@model IEnumerable<Carteira>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nome</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var carteira in Model)
+        {
+            <tr>
+                <td>@carteira.Id</td>
+                <td>@carteira.Nome</td>
+                <td>
+                    <a class="btn btn-lg"
+                       asp-page="./Edit"
+                       asp-route-carteiraId="@carteira.Id">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </a>
+                    <a class="btn btn-lg"
+                       asp-page="./Delete"
+                       asp-route-carteiraId="@carteira.Id">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
