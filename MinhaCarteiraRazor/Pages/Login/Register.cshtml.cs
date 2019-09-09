@@ -9,9 +9,21 @@ namespace MinhaCarteiraRazor.Pages.Login
 {
     public class RegisterModel : PageModel
     {
+        [BindProperty]
+        public string Nome { get; set; }
+        [BindProperty]
+        public string Email { get; set; }
+        [BindProperty]
+        public string Hash { get; set; }
 
         public void OnGet()
         {
+
+        }
+
+        public IActionResult OnPost()
+        {
+            return Page();
         }
     }
 }
