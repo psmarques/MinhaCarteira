@@ -12,21 +12,31 @@
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Nome" asp-for="Nome">
-            <span class="text-danger" asp-validation-for="Nome"></span>
+            <input type="text" class="form-control" placeholder="Nome" asp-for="UsuarioCadastro.Nome">
+            <span class="text-danger" asp-validation-for="UsuarioCadastro.Nome"></span>
         </div>
 
         <div class="form-group">
-            <input type="email" class="form-control" placeholder="E-mail" asp-for="Email">
-            <span class="text-danger" asp-validation-for="Email"></span>
+            <input type="email" class="form-control" placeholder="E-mail" asp-for="UsuarioCadastro.Email">
+            <span class="text-danger" asp-validation-for="UsuarioCadastro.Email"></span>
         </div>
 
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" asp-for="Password">
-            <span class="text-danger" asp-validation-for="Password"></span>
+            <input type="password" class="form-control" placeholder="Password" asp-for="UsuarioCadastro.Hash">
+            <span class="text-danger" asp-validation-for="UsuarioCadastro.Hash"></span>
         </div>
+
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Reenter Password" asp-for="Hash2">
+            <span class="text-danger" asp-validation-for="Hash2"></span>
+        </div>
+
 
         <input type="submit" class="btn btn-primary" value="Entrar">
     </form>
 
 </div>
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+}

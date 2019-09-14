@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,9 +31,40 @@ namespace MinhaCarteiraRazor
             });
 
             //services.AddSingleton<ICarteiraData, CarteiraInMemoryData>();
-            services.AddScoped<ICarteiraData, CarteiraData>();
             services.AddScoped<IUsuarioData, UsuarioData>();
-            services.AddMvc();
+            services.AddScoped<ICarteiraData, CarteiraData>();
+            services.AddScoped<IOperacaoData, OperacaoData>();
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                //options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+            });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions =>
+            {
+                cookieOptions.LoginPath = "/Login/SignIn";
+            });
+
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeFolder("/Carteiras");
+                options.Conventions.AuthorizeFolder("/Operacoes");
+                options.Conventions.AuthorizeFolder("/Api");
+            });
+        }
+
+        private void AddAuthentication(IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+            });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions =>
+            {
+                cookieOptions.LoginPath = "/login/signin";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +83,7 @@ namespace MinhaCarteiraRazor
             app.UseStaticFiles();
             app.UseNodeModules(env);
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc();
         }

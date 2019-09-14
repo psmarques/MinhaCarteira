@@ -38,20 +38,56 @@ namespace MinhaCarteiraRazor.Data.Migrations
                     b.ToTable("Carteiras");
                 });
 
+            modelBuilder.Entity("MinhaCarteiraRazor.Core.Entities.Operacao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CarteiraId");
+
+                    b.Property<DateTime>("Data");
+
+                    b.Property<string>("Papel")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<decimal>("PrecoEntrada");
+
+                    b.Property<decimal>("PrecoGain");
+
+                    b.Property<decimal>("PrecoStop");
+
+                    b.Property<decimal>("Resultado");
+
+                    b.Property<int>("Tipo");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarteiraId");
+
+                    b.ToTable("Operacoes");
+                });
+
             modelBuilder.Entity("MinhaCarteiraRazor.Core.Entities.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(160);
 
-                    b.Property<string>("Hash");
+                    b.Property<string>("Hash")
+                        .IsRequired()
+                        .HasMaxLength(255);
 
-                    b.Property<string>("Nome");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(160);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuario");
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("MinhaCarteiraRazor.Core.Entities.Carteira", b =>
@@ -59,6 +95,14 @@ namespace MinhaCarteiraRazor.Data.Migrations
                     b.HasOne("MinhaCarteiraRazor.Core.Entities.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId");
+                });
+
+            modelBuilder.Entity("MinhaCarteiraRazor.Core.Entities.Operacao", b =>
+                {
+                    b.HasOne("MinhaCarteiraRazor.Core.Entities.Carteira", "Carteira")
+                        .WithMany()
+                        .HasForeignKey("CarteiraId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

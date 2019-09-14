@@ -19,14 +19,17 @@ namespace MinhaCarteiraRazor
         {
             var host = BuildWebHost(args);
 
-            MigrateDatabase(host);
+            if (!File.Exists("minhaCarteira.db"))
+            {
+                MigrateDatabase(host);
+            }
 
             host.Run();
         }
 
         private static void MigrateDatabase(IWebHost host)
         {
-            using(var scope = host.Services.CreateScope())
+            using (var scope = host.Services.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<MinhaCarteiraDbContext>();
                 db.Database.Migrate();
