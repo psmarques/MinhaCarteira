@@ -7,5 +7,6 @@ namespace MinhaCarteiraRazor.Data
     {
         IEnumerable<Carteira> GetByName(string name);
 
+        IEnumerable<Carteira> GetTop5();
     }
 }

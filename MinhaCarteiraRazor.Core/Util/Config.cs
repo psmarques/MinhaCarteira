@@ -4,8 +4,9 @@ using System.Text;
 
 namespace MinhaCarteiraRazor.Core.Util
 {
-    public class HashHelper
+    public static class Config
     {
-        private const string KEY = "!#1234%$@";
+
+        public const string ConnectionStringName = "MinhaCarteira";
     }
 }

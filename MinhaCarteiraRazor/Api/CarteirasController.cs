@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MinhaCarteiraRazor.Core.Entities;
 using MinhaCarteiraRazor.Data;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MinhaCarteiraRazor.Api

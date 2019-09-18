@@ -22,5 +22,14 @@ namespace MinhaCarteiraRazor.Data
 
             return query;
         }
+
+        public IEnumerable<Carteira> GetTop5()
+        {
+            var query = (from r in db.Carteiras
+                        orderby (r.Investido / r.Atual) descending
+                        select r).Take(5);
+
+            return query;
+        }
     }
 }

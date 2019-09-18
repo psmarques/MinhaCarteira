@@ -11,11 +11,11 @@ namespace MinhaCarteiraRazor.Data
 
         T GetById(int id);
 
-        T Update(T carteira);
+        T Update(T item);
 
-        T Add(T newCarteira);
+        T Add(T newItem);
 
-        T Delete(T carteira);
+        T Delete(T item);
 
         int GetCount();
 

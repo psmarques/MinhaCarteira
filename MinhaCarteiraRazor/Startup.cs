@@ -25,45 +25,14 @@ namespace MinhaCarteiraRazor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<MinhaCarteiraDbContext>(options =>
-            {
-                options.UseSqlite(Configuration.GetConnectionString("MinhaCarteira"));
-            });
-
-            //services.AddSingleton<ICarteiraData, CarteiraInMemoryData>();
-            services.AddScoped<IUsuarioData, UsuarioData>();
-            services.AddScoped<ICarteiraData, CarteiraData>();
-            services.AddScoped<IOperacaoData, OperacaoData>();
-
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                //options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
-            });
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions =>
-            {
-                cookieOptions.LoginPath = "/Login/SignIn";
-            });
+            ConfigurarDataServices(services);
+            ConfigureAuthentication(services);
 
             services.AddMvc().AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizeFolder("/Carteiras");
                 options.Conventions.AuthorizeFolder("/Operacoes");
                 options.Conventions.AuthorizeFolder("/Api");
-            });
-        }
-
-        private void AddAuthentication(IServiceCollection services)
-        {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
-            });
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions =>
-            {
-                cookieOptions.LoginPath = "/login/signin";
             });
         }
 
@@ -87,5 +56,38 @@ namespace MinhaCarteiraRazor
 
             app.UseMvc();
         }
+
+        private void ConfigurarDataServices(IServiceCollection services)
+        {
+            //Memoria
+            services.AddScoped<IUsuarioData, Data.MemData.UsuarioMemData>();
+            services.AddScoped<ICarteiraData, Data.MemData.CarteiraMemData>();
+            services.AddScoped<IOperacaoData, Data.MemData.OperacaoMemData>();
+
+            //SQLite
+            //services.AddScoped<IUsuarioData, UsuarioData>();
+            //services.AddScoped<ICarteiraData, CarteiraData>();
+            //services.AddScoped<IOperacaoData, OperacaoData>();
+
+            services.AddDbContextPool<MinhaCarteiraDbContext>(options =>
+            {
+                options.UseSqlite(Configuration.GetConnectionString(Core.Util.Config.ConnectionStringName));
+            });
+        }
+
+        private void ConfigureAuthentication(IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+            });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions =>
+            {
+                cookieOptions.LoginPath = Core.Util.Pages.LoginSignIn;
+            });
+        }
+
+
     }
 }

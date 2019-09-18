@@ -1,22 +1,25 @@
-﻿using System;
+﻿using MinhaCarteiraRazor.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using MinhaCarteiraRazor.Core.Entities;
 
-namespace MinhaCarteiraRazor.Data
+namespace MinhaCarteiraRazor.Data.MemData
 {
-    public class CarteiraInMemoryData : ICarteiraData
+    public class CarteiraMemData : ICarteiraData
     {
         private List<Carteira> lst;
 
-        public CarteiraInMemoryData()
+        public CarteiraMemData()
         {
             var u = new Usuario { Id = 1, Nome = "Paulo Marques", Email = "psmarques@gmail.com" };
+            var u2 = new Usuario { Id = 1, Nome = "José da Silva", Email = "jsilva@gmail.com" };
 
             lst = new List<Carteira>();
-            lst.Add(new Carteira { Id = 1, Nome = "Carteira FII", }); //Usuario = u });
-            lst.Add(new Carteira { Id = 2, Nome = "Carteira Swing", });//Usuario = u });
-            lst.Add(new Carteira { Id = 3, Nome = "Carteira Buy Hold", });//Usuario = u });
+            lst.Add(new Carteira { Id = 1, Nome = "Carteira FII", Usuario = u, Investido = 2000, Atual = 2200 });
+            lst.Add(new Carteira { Id = 2, Nome = "Carteira Swing", Usuario = u, Investido = 1500, Atual = 1900 });
+            lst.Add(new Carteira { Id = 3, Nome = "Carteira Buy Hold", Usuario = u, Investido = 1000, Atual = 1900 });
+
+            lst.Add(new Carteira { Id = 4, Nome = "Carteira Swing", Usuario = u2, Investido = 3000, Atual = 4600 });
         }
 
         public IEnumerable<Carteira> GetAll()
@@ -50,7 +53,8 @@ namespace MinhaCarteiraRazor.Data
             if (carteira != null)
             {
                 item.Nome = carteira.Nome;
-                //item.Usuario = carteira.Usuario;
+                item.Atual = carteira.Atual;
+                item.Investido = carteira.Investido;
             }
 
             return item;
@@ -71,10 +75,14 @@ namespace MinhaCarteiraRazor.Data
             if (carteira != null)
             {
                 lst.Remove(item);
-                //item.Usuario = carteira.Usuario;
             }
 
             return item;
+        }
+
+        public int GetCount()
+        {
+            return lst.Count;
         }
 
         public int Commit()
@@ -82,9 +90,9 @@ namespace MinhaCarteiraRazor.Data
             return 1;
         }
 
-        public int GetCount()
+        public IEnumerable<Carteira> GetTop5()
         {
-            return lst.Count;
+            return lst.OrderByDescending(x => (x.Investido / x.Atual)).Take(5);
         }
     }
 }
