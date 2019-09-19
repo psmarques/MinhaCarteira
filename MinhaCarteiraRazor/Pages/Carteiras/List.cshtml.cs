@@ -23,15 +23,17 @@ namespace MinhaCarteiraRazor.Pages.Carteiras
             this.data = data;
         }
 
-        public IActionResult OnGet()
+        public async System.Threading.Tasks.Task<IActionResult> OnGetAsync()
         {
+            var user = Configuration.AuthUtil.GetUsuarioLogado(HttpContext);
+
             if (!string.IsNullOrEmpty(FiltroNome))
             {
-                LstCarteira = data.GetByName(FiltroNome);
+                LstCarteira = data.GetByName(FiltroNome, user.Id);
             }
             else
             {
-                LstCarteira = data.GetAll();
+                LstCarteira = data.GetAll(user.Id);
             }
 
             return Page();

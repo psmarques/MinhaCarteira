@@ -19,12 +19,8 @@ namespace MinhaCarteiraRazor.Core.Util
                 var d = new TopFiveDTO();
 
                 d.Id = item.Id;
-                d.Nome = item.Usuario.Nome + " - " + item.Nome;
-
-                if (item.Investido > 0)
-                    d.Resultado = Math.Round(item.Atual / item.Investido - 1, 2, MidpointRounding.AwayFromZero);
-                else
-                    d.Resultado = 0;
+                d.Nome = item.Nome;
+                d.Resultado = item.Resultado;
 
                 r.Add(d);
             }

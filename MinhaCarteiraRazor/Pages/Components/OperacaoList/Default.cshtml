@@ -1,0 +1,48 @@
+﻿@using Core.Entities
+
+@model IEnumerable<Operacao>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Carteira</th>
+            <th>Papel</th>
+            <th>Preço Atual</th>
+            <th>Preço Entrada</th>
+            <th>Preço Stop</th>
+            <th>Preço Gain</th>
+            <th>Resultado Atual</th>
+            <th>Situação</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var operacao in Model)
+        {
+        <tr>
+            <td>@operacao.Id</td>
+            <td>@operacao.Carteira.Nome</td>
+            <td>@operacao.Papel</td>
+            <td>-</td>
+            <td>@operacao.PrecoEntrada.ToString("c2")</td>
+            <td>@operacao.PrecoStop.ToString("c2")</td>
+            <td>@operacao.PrecoGain.ToString("c2")</td>
+            <td>@operacao.Resultado.ToString("00.00")</td>
+            <td>@operacao.Tipo</td>
+            <td>
+                <a class="btn btn-lg"
+                   asp-page="./Edit"
+                   asp-route-carteiraId="@operacao.Id">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+                <a class="btn btn-lg"
+                   asp-page="./Delete"
+                   asp-route-carteiraId="@operacao.Id">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

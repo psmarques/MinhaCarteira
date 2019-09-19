@@ -20,6 +20,7 @@ namespace MinhaCarteiraRazor.Data.MemData
             lst.Add(new Carteira { Id = 3, Nome = "Carteira Buy Hold", Usuario = u, Investido = 1000, Atual = 1900 });
 
             lst.Add(new Carteira { Id = 4, Nome = "Carteira Swing", Usuario = u2, Investido = 3000, Atual = 4600 });
+            lst.Add(new Carteira { Id = 5, Nome = "Carteira 2019", Usuario = u2, Investido = 2000, Atual = 3600 });
         }
 
         public IEnumerable<Carteira> GetAll()
@@ -31,11 +32,21 @@ namespace MinhaCarteiraRazor.Data.MemData
             return r;
         }
 
-        public IEnumerable<Carteira> GetByName(string name)
+        public IEnumerable<Carteira> GetAll(int userId)
+        {
+            var r = from item in this.lst
+                    where item.Usuario.Id == userId
+                    orderby item.Nome
+                    select item;
+
+            return r;
+        }
+
+        public IEnumerable<Carteira> GetByName(string name, int userId)
         {
             var r = from item in this.lst
                     orderby item.Nome
-                    where item.Nome.StartsWith(name, StringComparison.OrdinalIgnoreCase)
+                    where item.Nome.StartsWith(name, StringComparison.OrdinalIgnoreCase) && item.Usuario.Id == userId
                     select item;
 
             return r;
@@ -92,7 +103,7 @@ namespace MinhaCarteiraRazor.Data.MemData
 
         public IEnumerable<Carteira> GetTop5()
         {
-            return lst.OrderByDescending(x => (x.Investido / x.Atual)).Take(5);
+            return lst.OrderByDescending(x => (x.Investido > 0 ? (x.Atual / x.Investido) : 0)).Take(5);
         }
     }
 }

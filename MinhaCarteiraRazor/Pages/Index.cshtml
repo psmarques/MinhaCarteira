@@ -6,64 +6,60 @@
 
 <h3> Carteiras </h3>
 <div class="row">
-    <div class="col-sm-9">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title">Principais Carteiras</div>
-                    </div>
-                    <div class="panel-body">
-                        <div id="chartCarteiras"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title">Ranking</div>
-                    </div>
-                    <div class="panel-body with-table">
-                        <table class="table table-bordered table-responsive">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nome</th>
-                                    <th>Carteira</th>
-                                    <th>Resultado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.LstTop5Carteiras)
-                                {
-                                    <tr>
-                                        <td>@item.Id</td>
-                                        <td>@item.Usuario.Nome</td>
-                                        <td>@item.Nome</td>
-                                        <td>@string.Format("{0:0.00}", item.Atual / @item.Investido - 1)%</td>
-                                    </tr>
-
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="col-sm-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div class="panel-title">
-                    <h4>
-                        Índice Bovespa
-                    </h4>
-                </div>
+                <div class="panel-title">Rentabilidade das Carteiras</div>
             </div>
-            <div class="panel-body no-padding">
-                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                <div id="chart_ibov" class="ibovChart"></div>
-
+            <div class="panel-body">
+                <div id="chartCarteiras" class="chartCarteiras"></div>
             </div>
         </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="panel-title">Ranking</div>
+            </div>
+            <div class="panel-body with-table">
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Carteira</th>
+                            <th>Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LstTop5Carteiras)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.Usuario.Nome</td>
+                                <td>@item.Nome</td>
+                                <td>@string.Format("{0:0.00}%", item.Resultado)</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h4>
+                Índice Bovespa
+            </h4>
+        </div>
+    </div>
+    <div class="panel-body no-padding">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <div id="chart_ibov" class="ibovChart"></div>
+
     </div>
 </div>
 
@@ -87,15 +83,11 @@
                 data.addColumn('number', 'Resultado');
 
                 $(response).each(function (i, obj) {
-
                     data.addRow([obj.nome, obj.resultado]);
-                    console.log(obj);
-
                 });
 
                 var chart2 = new google.visualization.ColumnChart(document.getElementById('chartCarteiras'));
                 chart2.draw(data, options);
-                //console.log(response);
 
             });
 

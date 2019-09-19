@@ -55,6 +55,15 @@ namespace MinhaCarteiraRazor.Data.MemData
             return lstOperacao;
         }
 
+        public IEnumerable<Operacao> GetAll(int userId)
+        {
+            var r = from item in lstOperacao
+                    where item.Carteira.Usuario.Id == userId
+                    select item;
+
+            return r;
+        }
+
         public Operacao GetById(int id)
         {
             return lstOperacao.FirstOrDefault(x => x.Id == id);

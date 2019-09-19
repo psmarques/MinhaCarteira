@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
@@ -15,6 +16,9 @@ namespace MinhaCarteiraRazor.Core.Entities
 
         [Required, StringLength(255)]
         public string Hash { get; set; }
+
+        [DefaultValue("User")]
+        public string Roles { get; set; }
 
     }
 }

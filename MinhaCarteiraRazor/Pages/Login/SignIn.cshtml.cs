@@ -45,8 +45,16 @@ namespace MinhaCarteiraRazor.Pages.Login
                 {
                     var claims = new List<Claim>
                     {
-                        new Claim(ClaimTypes.Name, usr.Nome)
+                        new Claim(ClaimTypes.Sid, usr.Id.ToString()),
+                        new Claim(ClaimTypes.Name, usr.Nome),
+                        new Claim(ClaimTypes.Email, usr.Email),
+                        new Claim(ClaimTypes.Role, "User")
                     };
+
+                    if(string.Equals(Email, "psmarques@gmail.com", StringComparison.OrdinalIgnoreCase))
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+                    }
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));

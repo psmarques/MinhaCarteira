@@ -15,9 +15,9 @@ namespace MinhaCarteiraRazor.Data.MemData
             lstUsuarios = new List<Usuario>();
 
             lstUsuarios.Add(new Usuario { Id = 1, Nome = "Paulo Marques", Email = "psmarques@gmail.com", Hash = "AQAAAAEAACcQAAAAEG7/p27qy0OgIveUGBFcRncDwAsfFNUQW9n5TUBa0kGT3aKdWXdRfehFtxilR8IDfQ==" });
-            lstUsuarios.Add(new Usuario { Id = 2, Nome = "José da Silva", Email = "jsilva@gmail.com", Hash = "" });
-            lstUsuarios.Add(new Usuario { Id = 3, Nome = "Ana Marchesi", Email = "anamarchesi@gmail.com", Hash = "" });
-            lstUsuarios.Add(new Usuario { Id = 4, Nome = "João Barriga", Email = "jbarriga@gmail.com", Hash = "" });
+            lstUsuarios.Add(new Usuario { Id = 2, Nome = "José da Silva", Email = "jsilva@gmail.com", Hash = "AQAAAAEAACcQAAAAEG7/p27qy0OgIveUGBFcRncDwAsfFNUQW9n5TUBa0kGT3aKdWXdRfehFtxilR8IDfQ==" });
+            lstUsuarios.Add(new Usuario { Id = 3, Nome = "Ana Marchesi", Email = "anamarchesi@gmail.com", Hash = "AQAAAAEAACcQAAAAEG7/p27qy0OgIveUGBFcRncDwAsfFNUQW9n5TUBa0kGT3aKdWXdRfehFtxilR8IDfQ==" });
+            lstUsuarios.Add(new Usuario { Id = 4, Nome = "João Barriga", Email = "jbarriga@gmail.com", Hash = "AQAAAAEAACcQAAAAEG7/p27qy0OgIveUGBFcRncDwAsfFNUQW9n5TUBa0kGT3aKdWXdRfehFtxilR8IDfQ==" });
         }
 
         public Usuario Add(Usuario newItem)

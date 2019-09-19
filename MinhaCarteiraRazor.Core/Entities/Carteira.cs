@@ -16,9 +16,19 @@ namespace MinhaCarteiraRazor.Core.Entities
 
         public decimal Atual { get; set; }
 
+        public decimal Resultado
+        {
+            get
+            {
+                return Math.Round(Atual / (Investido <= 0 ? 1 : Investido) - 1, 2);
+            }
+        }
+
         public Carteira()
         {
 
         }
+
+
     }
 }

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MinhaCarteiraRazor.Core.Entities;
+using MinhaCarteiraRazor.Core.Util;
 using MinhaCarteiraRazor.Data;
+using System.Linq;
 
 namespace MinhaCarteiraRazor.Pages.Carteiras
 {
@@ -15,6 +15,8 @@ namespace MinhaCarteiraRazor.Pages.Carteiras
 
         [BindProperty]
         public Carteira Carteira { get; set; }
+
+        public List<Claim> LstClaim { get; set; }
 
         public EditModel(ICarteiraData data)
         {
@@ -29,32 +31,35 @@ namespace MinhaCarteiraRazor.Pages.Carteiras
                 Carteira = new Carteira();
 
             if (Carteira == null)
-                return RedirectToPage("./NotFound");
+                return RedirectToPage(Core.Util.Pages.CarteirasNotFound);
 
             return Page();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            Carteira.Usuario = Configuration.AuthUtil.GetUsuarioLogado(HttpContext);
 
             if (Carteira.Id > 0)
             {
+                
                 Carteira = data.Update(Carteira);
-                TempData["Message"] = "Carteira alterada com sucesso!";
+                TempData["Message"] = Messages.MSG_CARTEIRA_ALTERADA;
             }
             else
             {
                 Carteira = data.Add(Carteira);
-                TempData["Message"] = "Carteira criada com sucesso!";
+                TempData["Message"] = Messages.MSG_CARTEIRA_CRIADA;
             }
 
             data.Commit();
-            return RedirectToPage("./List");
+
+            return RedirectToPage(Core.Util.Pages.CarteirasList);
         }
     }
 }
