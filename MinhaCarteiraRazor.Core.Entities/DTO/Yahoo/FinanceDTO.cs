@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MinhaCarteiraRazor.Core.DTO.Yahoo
+namespace MinhaCarteiraRazor.Core.Entities.DTO.Yahoo
 {
     public class FinanceDTO
     {

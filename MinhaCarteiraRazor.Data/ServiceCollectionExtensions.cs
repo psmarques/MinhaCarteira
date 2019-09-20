@@ -21,10 +21,10 @@ namespace MinhaCarteiraRazor.Data
             //services.AddScoped<ICarteiraData, CarteiraData>();
             //services.AddScoped<IOperacaoData, OperacaoData>();
 
-            services.AddDbContextPool<MinhaCarteiraDbContext>(options =>
-            {
-                options.UseSqlite(connString);
-            });
+            //services.AddDbContextPool<MinhaCarteiraDbContext>(options =>
+            //{
+            //    options.UseSqlite(connString);
+            //});
         }
     }
 }

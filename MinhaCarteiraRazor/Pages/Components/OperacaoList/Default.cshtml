@@ -21,15 +21,15 @@
         @foreach (var operacao in Model)
         {
         <tr>
-            <td>@operacao.Id</td>
-            <td>@operacao.Carteira.Nome</td>
-            <td>@operacao.Papel</td>
-            <td>-</td>
-            <td>@operacao.PrecoEntrada.ToString("c2")</td>
-            <td>@operacao.PrecoStop.ToString("c2")</td>
-            <td>@operacao.PrecoGain.ToString("c2")</td>
-            <td>@operacao.Resultado.ToString("00.00")</td>
-            <td>@operacao.Tipo</td>
+            <td class="align-middle">@operacao.Id</td>
+            <td class="align-middle">@operacao.Carteira.Nome</td>
+            <td class="align-middle">@operacao.Papel</td>
+            <td class="align-middle">-</td>
+            <td class="align-middle">@operacao.PrecoEntrada.ToString("c2")</td>
+            <td class="align-middle">@operacao.PrecoStop.ToString("c2")</td>
+            <td class="align-middle">@operacao.PrecoGain.ToString("c2")</td>
+            <td class="align-middle">@operacao.Resultado.ToString("00.00")</td>
+            <td class="align-middle">@operacao.Tipo</td>
             <td>
                 <a class="btn btn-lg"
                    asp-page="./Edit"

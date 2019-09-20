@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MinhaCarteiraRazor.Core.Entities\MinhaCarteiraRazor.Core.Entities.csproj" />
+    <ProjectReference Include="..\MinhaCarteiraRazor.Core\MinhaCarteiraRazor.Core.csproj" />
     <ProjectReference Include="..\MinhaCarteiraRazor.Data\MinhaCarteiraRazor.Data.csproj" />
   </ItemGroup>
 </Project>

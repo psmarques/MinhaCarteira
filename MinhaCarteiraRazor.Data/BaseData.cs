@@ -1,4 +1,5 @@
-﻿using MinhaCarteiraRazor.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using MinhaCarteiraRazor.Core.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -51,6 +52,12 @@ namespace MinhaCarteiraRazor.Data
         public int Commit()
         {
             return db.SaveChanges();
+        }
+
+        public async System.Threading.Tasks.Task<IEnumerable<T>> GetAllAsync()
+        {
+            var r = await db.Set<T>().ToListAsync();
+            return r;
         }
     }
 }

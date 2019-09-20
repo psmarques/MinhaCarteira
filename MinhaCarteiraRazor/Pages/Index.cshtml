@@ -57,15 +57,18 @@
         </div>
     </div>
     <div class="panel-body no-padding">
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <div id="chart_ibov" class="ibovChart"></div>
-
     </div>
 </div>
 
 @section Scripts {
 
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <script type="text/javascript">
+
+        //TODO: Mover tudo pra um arquivo separado
+
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(drawChart);
 

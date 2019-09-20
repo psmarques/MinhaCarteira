@@ -21,5 +21,7 @@ namespace MinhaCarteiraRazor.Data
 
         int Commit();
 
+        System.Threading.Tasks.Task<IEnumerable<T>> GetAllAsync();
+
     }
 }

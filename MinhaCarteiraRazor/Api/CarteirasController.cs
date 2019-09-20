@@ -10,17 +10,17 @@ namespace MinhaCarteiraRazor.Api
     //[ApiController]
     public class CarteirasController : ControllerBase
     {
-        private readonly MinhaCarteiraDbContext context;
+        private readonly ICarteiraData data;
 
-        public CarteirasController(MinhaCarteiraDbContext context)
+        public CarteirasController(ICarteiraData data)
         {
-            this.context = context;
+            this.data = data;
         }
 
         [HttpGet]
         public IEnumerable<Carteira> GetCarteiras()
         {
-            return context.Carteiras;
+            return data.GetAll();
         }
 
         [HttpGet("{id}")]
@@ -31,7 +31,7 @@ namespace MinhaCarteiraRazor.Api
                 return BadRequest(ModelState);
             }
 
-            var carteira = await context.Carteiras.FindAsync(id);
+            var carteira = await data.GetAllAsync();
 
             if (carteira == null)
             {

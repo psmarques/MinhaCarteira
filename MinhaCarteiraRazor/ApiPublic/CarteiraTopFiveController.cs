@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MinhaCarteiraRazor.Core.DTO;
-using MinhaCarteiraRazor.Core.Entities;
+using MinhaCarteiraRazor.Core.Entities.DTO;
 using MinhaCarteiraRazor.Data;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MinhaCarteiraRazor.ApiPublic
 {

@@ -1,11 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using MinhaCarteiraRazor.Core.Entities;
 
 namespace MinhaCarteiraRazor.Data
 {
+    public interface ICarteiraData : IBaseData<Carteira>
+    {
+        IEnumerable<Carteira> GetAll(int userId);
+
+        IEnumerable<Carteira> GetByName(string name, int userId);
+
+        IEnumerable<Carteira> GetTop5();
+    }
+
     public class CarteiraData : BaseData<Carteira>, ICarteiraData
     {
         public CarteiraData(MinhaCarteiraDbContext db)
@@ -26,7 +33,7 @@ namespace MinhaCarteiraRazor.Data
         public IEnumerable<Carteira> GetByName(string name, int userId)
         {
             var query = from r in db.Carteiras
-                        where (r.Nome.StartsWith(name) || string.IsNullOrEmpty(name)) && r.Usuario.Id == userId 
+                        where (r.Nome.StartsWith(name) || string.IsNullOrEmpty(name)) && r.Usuario.Id == userId
                         orderby r.Nome
                         select r;
 
@@ -36,8 +43,8 @@ namespace MinhaCarteiraRazor.Data
         public IEnumerable<Carteira> GetTop5()
         {
             var query = (from r in db.Carteiras
-                        orderby (r.Investido / r.Atual) descending
-                        select r).Take(5);
+                         orderby (r.Investido / r.Atual) descending
+                         select r).Take(5);
 
             return query;
         }

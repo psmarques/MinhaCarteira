@@ -1,10 +1,6 @@
-﻿using MinhaCarteiraRazor.Core.DTO;
-using System;
+﻿using MinhaCarteiraRazor.Core.Entities.DTO;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MinhaCarteiraRazor.Core.Util
@@ -36,7 +32,7 @@ namespace MinhaCarteiraRazor.Core.Util
                 {
                     string json = await response.Content.ReadAsStringAsync();
 
-                    var r = cnv.ConverterJsonParaObject<Core.DTO.Yahoo.RootObject>(json);
+                    var r = cnv.ConverterJsonParaObject<Entities.DTO.Yahoo.RootObject>(json);
 
                     result.Codigo = papel.Codigo;
 
@@ -84,11 +80,11 @@ namespace MinhaCarteiraRazor.Core.Util
                 {
                     string json = await response.Content.ReadAsStringAsync();
 
-                    var r = cnv.ConverterJsonParaObject<DTO.YahooChart.RootObject>(json);
+                    var r = cnv.ConverterJsonParaObject<Entities.DTO.YahooChart.RootObject>(json);
 
                     if (r.chart != null && r.chart.result != null && r.chart.result.Count > 0)
                     {
-                        var quote = r.chart.result[0].indicators.quote != null ? r.chart.result[0].indicators.quote[0] : new DTO.YahooChart.Quote();
+                        var quote = r.chart.result[0].indicators.quote != null ? r.chart.result[0].indicators.quote[0] : new Entities.DTO.YahooChart.Quote();
 
                         for (int i = 0; i < quote.open.Count; i++)
                         {

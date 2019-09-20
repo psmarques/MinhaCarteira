@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MinhaCarteiraRazor.Core.DTO
+namespace MinhaCarteiraRazor.Core.Entities.DTO
 {
     public class PapelHistoricoDTO
     {

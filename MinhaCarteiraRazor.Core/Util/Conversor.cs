@@ -1,5 +1,5 @@
-﻿using MinhaCarteiraRazor.Core.DTO;
-using MinhaCarteiraRazor.Core.Entities;
+﻿using MinhaCarteiraRazor.Core.Entities;
+using MinhaCarteiraRazor.Core.Entities.DTO;
 using System;
 using System.Collections.Generic;
 using System.IO;

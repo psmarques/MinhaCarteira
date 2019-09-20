@@ -20,6 +20,11 @@ namespace MinhaCarteiraRazor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Setar Idioma Default
+            System.Globalization.CultureInfo.DefaultThreadCurrentCulture = new System.Globalization.CultureInfo("pt-BR");
+            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = new System.Globalization.CultureInfo("pt-BR");
+
+            //DataAccess e Autenticação
             services.AddDataAccessServices(cfg.GetConnectionString(Core.Util.Config.ConnectionStringName));
             services.ConfigureAuthentication();
 

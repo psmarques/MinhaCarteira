@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MinhaCarteiraRazor.Core.DTO.YahooChart
+namespace MinhaCarteiraRazor.Core.Entities.DTO.YahooChart
 {
     public class ChartDTO
     {

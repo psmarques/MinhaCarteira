@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MinhaCarteiraRazor.Core\MinhaCarteiraRazor.Core.csproj" />
+    <ProjectReference Include="..\MinhaCarteiraRazor.Core.Entities\MinhaCarteiraRazor.Core.Entities.csproj" />
   </ItemGroup>
 
 </Project>
